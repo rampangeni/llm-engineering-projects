@@ -1,0 +1,50 @@
+[project]
+name = "price-dataset-and-baselines"
+version = "0.1.0"
+description = "Curate the 'Price is Right' Amazon items dataset, run baseline price predictors, and train the deep neural network (deep_neural_network.pth)."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.7",
+    "python-dotenv>=1.0",
+    "numpy>=1.26",
+    "tqdm>=4.66",
+    "datasets>=3.6,<5",
+    "huggingface_hub>=0.25",
+]
+
+[project.optional-dependencies]
+# LLM summarisation of items: Groq batch API / any litellm provider
+summarize = ["litellm>=1.77", "groq>=0.30"]
+# Traditional ML baselines
+baselines = ["scikit-learn>=1.5", "pandas>=2.2", "xgboost>=2.0"]
+# Deep neural network training
+dnn = ["torch>=2.3", "scikit-learn>=1.5", "scipy>=1.11"]
+# Frontier-model zero-shot comparison 
+frontier = ["litellm>=1.77"]
+# Interactive scatter / error-trend HTML charts
+plots = ["plotly>=5.20", "pandas>=2.2"]
+all = [
+    "price-dataset-and-baselines[summarize,baselines,dnn,frontier,plots]",
+]
+dev = ["pytest>=8"]
+
+[project.scripts]
+curate-items = "price_dataset.cli.curate:main"
+summarize-items = "price_dataset.cli.summarize:main"
+run-baselines = "price_dataset.cli.baselines:main"
+human-baseline = "price_dataset.cli.human:main"
+train-dnn = "price_dataset.cli.train_dnn:main"
+eval-dnn = "price_dataset.cli.eval_dnn:main"
+eval-frontier = "price_dataset.cli.frontier:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/price_dataset"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "price-is-right-deal-hunter"
+version = "0.1.0"
+description = "Autonomous multi-agent deal hunter: scans deal RSS feeds, estimates true prices with an ensemble (Modal fine-tuned Llama + RAG frontier model + neural net), and pushes notifications."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.7",
+    "openai>=1.109.1",
+    "litellm>=1.77.5",
+    "requests>=2.32.5",
+    "beautifulsoup4>=4.14.2",
+    "feedparser>=6.0.12",
+    "python-dotenv>=1.1.1",
+    "tqdm>=4.67.1",
+]
+
+[project.optional-dependencies]
+rag = ["chromadb>=1.1.0", "sentence-transformers>=5.1.1"]
+nn = ["torch>=2.8.0", "scikit-learn>=1.7.2", "numpy>=2.0"]
+modal = ["modal>=1.1.4"]
+ui = ["gradio>=5.47.2,<6.0", "plotly>=6.3.0", "scikit-learn>=1.7.2", "numpy>=2.0"]
+build = ["datasets>=3.6.0,<4"]
+all = ["price-is-right-deal-hunter[rag,nn,modal,ui,build]"]
+dev = ["pytest>=8.0", "numpy>=2.0", "scikit-learn>=1.7.2"]
+
+[project.scripts]
+deal-hunter = "deal_hunter.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/deal_hunter"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+uv.lock
+*.egg-info/
+dist/
+build/
+# runtime data (never commit)
+products_vectorstore/
+memory.json
+*.pth
+.cache/

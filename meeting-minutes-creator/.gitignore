@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+uv.lock
+.pytest_cache/
+*.egg-info/
+outputs/
+*.mp3
+*.wav
+*.m4a

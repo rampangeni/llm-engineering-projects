@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+uv.lock
+.env
+# generated
+jsonl/
+artifacts/
+*.html

@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+*.egg-info/
+uv.lock
+data/vector_db/
+vector_db/
+preprocessed_db/
+chroma/
+*.html
+!docs/*.html

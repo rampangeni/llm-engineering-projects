@@ -1,0 +1,33 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.hf-venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+build/
+dist/
+uv.lock
+
+# Project artifacts (vector stores, model weights, runtime state, downloads)
+vector_db/
+chroma*/
+artifacts/
+*.pth
+*.safetensors
+*.bin
+*.gguf
+wandb/
+memory.json
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
